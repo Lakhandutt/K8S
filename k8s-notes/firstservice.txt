@@ -7,5 +7,13 @@
 
 #template for service can be found at official docs:
 
+#some service commands
+kubectl describe svc <service-name>
+#power of labels
+kubectl get pods
+kubectl get po
+kubectl get po --show-labels -l release=v1
+
+
 
 

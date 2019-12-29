@@ -1,0 +1,28 @@
+kind: Service
+apiVersion: v1
+metadata:
+  # Unique key of the Service instance
+  name: first-service
+spec:
+  ports:
+    # Accept traffic sent to port 80
+    - name: http
+      port: 8081 # accept traffic on port 80
+      targetPort: 8081    # and forward the traffic on port 80 of container (same as docker container run)
+      nodePort: 30080        # only for type: NodePort and always greater than 30,000
+# This defines which pods are going to be represented by this service
+# The service become a network endpoint for either other services
+# or maybe external users to connect to (browser)  
+  selector:
+    # Loadbalance traffic across Pods matching
+    # this label selector
+    app: artifactory
+    release: v2
+  # Create an HA proxy in the cloud provider
+  # with an External IP address - *Only supported
+  # by some cloud providers*
+  type: NodePort    # loadbalancer is not work on local cluster
+  # there is one another option type:ClusterIp 
+  #(which tells the service is only can be used internally on cluster like for internal microservices)
+  #but we need angularapp to expose so final choice is NodePort
+  # for production nodeport is replace by loadbalancer which work on sensible ports like 80

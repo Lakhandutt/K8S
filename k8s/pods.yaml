@@ -1,0 +1,40 @@
+# camel case 
+apiVersion: v1
+# kind of object
+kind: Pod
+# use spaces not tabs
+metadata:
+  name: first-pod
+  #provide label on metadata block for service slectors
+  labels:
+    app: angularAppPod 
+    release: v1
+#specifications 
+spec:
+# list in yaml 
+  containers:
+  - name: angularapp
+    image: lakhandutt/angularapp:v1
+
+#document seperator
+---
+#second pod
+
+apiVersion: v1
+# kind of object
+kind: Pod
+# use spaces not tabs
+metadata:
+  name: second-pod
+  #provide label on metadata block for service slectors
+  labels:
+    app: artifactory
+    release: v2
+#specifications 
+spec:
+# list in yaml 
+  containers:
+  - name: artifactory
+    image: scandio/jfrog-artifactory:5.0.1
+
+---

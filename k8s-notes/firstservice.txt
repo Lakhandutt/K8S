@@ -1,0 +1,11 @@
+#pods have short lives and in kubernetes the concept of services have long life
+# a service have an ip address and a stable fix port we attach services with pods
+# with service we can connect with kubernetes cluster and find suitable pod
+
+1. pod labels: key value pair for identifying the pod
+2. service selector : key value pair to select pod 
+
+#template for service can be found at official docs:
+
+
+

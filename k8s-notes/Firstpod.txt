@@ -1,0 +1,17 @@
+1: minikube status
+2: cd C:/Users/Lakhan/Documents/VSCode/Kubernetes/k8s
+3: kubectl get all
+4: kubectl apply -f pods.yaml
+    $ minikube ip
+     192.168.99.100
+5. pods are not accessible from outside only accessed inside in the cluster
+
+#Some pods commands:
+kubectl describe pod first-pod   # found details and events
+kubectl exec first-pod  ls  #execute command in container
+kubectl -it exec first-pod sh #executing shell in container
+
+#getting the html file after executing shell
+   wget http://localhost:80
+   cat index.html
+   

@@ -7,8 +7,8 @@ spec:
   ports:
     # Accept traffic sent to port 80
     - name: http
-      port: 8081 # accept traffic on port 80
-      targetPort: 8081    # and forward the traffic on port 80 of container (same as docker container run)
+      port: 80 # accept traffic on port 80
+      targetPort: 80    # and forward the traffic on port 80 of container (same as docker container run)
       nodePort: 30080        # only for type: NodePort and always greater than 30,000
 # This defines which pods are going to be represented by this service
 # The service become a network endpoint for either other services
@@ -16,8 +16,7 @@ spec:
   selector:
     # Loadbalance traffic across Pods matching
     # this label selector
-    app: artifactory
-    release: v2
+    app: angularapp-replicaset
   # Create an HA proxy in the cloud provider
   # with an External IP address - *Only supported
   # by some cloud providers*

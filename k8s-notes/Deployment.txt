@@ -1,0 +1,33 @@
+#In some cases we prefer the deployment over the replicasets.
+#deployments have additional feature like rolling upgrade (by adding some yaml lines in replicaset)
+
+# hirarchy:
+# deployments have replicaset => replicaset have pods => pods are accessible by service
+
+# when we start upgrading the deployments kubernetes will start deleting and creating the replicasets.
+#and replicaset start deleting and updating pods
+
+#when we update the image tag in the deployment
+#On upgrade to new version a new replica set is created and in old version of RS replicas sets to be 0.
+# so in case of any issue in upgrade we rollback to previous replicaset and increase the replicas.
+
+#some rollout commands:
+ kubectl rollout status deployment deployment-angularapp
+
+$  kubectl rollout history deployment deployment-angularapp
+deployment.apps/deployment-angularapp
+REVISION  CHANGE-CAUSE
+1         <none>
+2         <none>
+
+$ kubectl rollout undo deployment deployment-angularapp --to-revision=2
+
+$ kubectl rollout undo deployment deployment-angularapp --to-revision=1
+
+#if we specify the wrong or bad docker image in deployment its not going to deploy and does not remove the
+#old replica set because it will upgrade to new replica set only when all pods are healthy
+#for this pod goes to a status known as ImagePullBackOff: it will wait some seconds to pull the image again
+# and continue retring again and again
+# so old replica set is working untill new one is created
+# when we again specify the correct image the replica set will upgrade it self for new deployment.
+

@@ -35,6 +35,8 @@ spec:
 # list in yaml 
   containers:
   - name: artifactory
-    image: scandio/jfrog-artifactory:5.0.1
+    #image: scandio/jfrog-artifactory:5.0.1
+    image: lakhandutt/angularapp:v1
+
 
 ---

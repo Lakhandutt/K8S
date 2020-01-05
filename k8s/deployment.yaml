@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  # Unique key of the ReplicaSet instance
+  name: deployment-angularapp
+spec:
+  # 3 Pods should exist at all times.
+  replicas: 3
+  selector:
+    matchLabels:  #always match with pod lebals
+      app: angularapp-replicaset
+  template:
+    metadata:
+      labels:
+        app: angularapp-replicaset
+    spec:
+      containers:
+      # Run the nginx image
+      - name: angularapp
+        image: nginx

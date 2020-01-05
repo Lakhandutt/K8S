@@ -1,0 +1,15 @@
+# For deleting a pod (--force = for forcefully delete)
+kubectl delete po angularapp
+
+#angularapp not comeback after delete
+# so instead of deploying pods directly we deploy replicaset
+# by specifying replica set we set that how many pods of the application we want to running at all time.
+# for apiversion we have to specify the group and api version
+
+#define pod in template
+
+ kubectl describe rs replicaset-angularapp
+ kubectl delete rs replicaset-angularapp
+
+ #if you delete a replicaset it will also terminate the nodes of the replica set.
+ 

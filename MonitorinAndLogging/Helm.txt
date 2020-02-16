@@ -1,0 +1,30 @@
+helm: package manager for K8s (like yum,apt and brew)
+install helm binary on local use git hub repo for reference 
+ helm version
+ helm init
+# after helm init tiller will be deploy on the kube-system namespace
+ helm version
+#in official repo of helm goto charts/incubator or charts/stable for production
+ use mysql for start as hello word
+ helm repo update
+ helm install stable/mysql --name my-sql-helm-installation --set mysqlPassword=password 
+
+ #most of the appliactions have some intial configuration like in mysql there is intial username and
+  password you can find this in configuration section on github repo
+# above helm command didn't install mysql on default namespace due to permissions issue.
+
+fix of this: adding privilage to tiller pod 
+1. kubectl create serviceaccount --namespace kube-system tiller
+2. kubectl create clusterrolebinding tiller-cluster-rule 
+   --clusterrole=cluster-admin --serviceaccount=kube-system:tiller
+3. kubectl patch deploy --namespace kube-system 
+    tiller-deploy -p '{"spec":{"template":{"spec":{"serviceaccount":"tiller"}}}}'
+
+now recall:
+  helm install stable/mysql --name my-sql-helm-installation --set mysqlPassword=password 
+output is very detail description shows what resources are created and how to test
+
+helm ls
+# to delete all packages and installation
+helm delete --purge my-sql-helm-installation
+   

@@ -1,0 +1,21 @@
+#logging of container in k8s done by the ELK stack or elastic stack
+ELK = ElasticSearch Logstash(or fluentd) Kibana
+logstash= continuously geting the logs
+elasticsearch manages the logs
+kibana used for analysis the logs
+
+installing the stack:
+ you can find the stack in official kubernetes github repo in add-ons 
+ for fluentd most of the config is store in: fluentd-es-configmap.yaml
+ apply the files 
+
+ points to note:
+   service account is used to provide the proper access to stack 
+   deamonsets is like the replicaset but we didn't need to specify the number of replica
+   deamon set knows it needs to run on every single node
+   elastic search using statefull set same as replicaset but name is not random
+   its in sequence 0,1,2,3 mostly used when you need stable name of pods
+   standard template not provide volume claim it store logs in temporary based
+   needs to add volumeclaim template 
+   kubectl get po -n kube-system
+    kubectl get svc -n kube-system 

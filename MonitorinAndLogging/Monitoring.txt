@@ -1,0 +1,11 @@
+#prometheus and grafana:
+in AWS you can monitor nodes via cloudwatch : cpu performance and memory
+also have functionality of detail monitoring but we are setting our monitoring
+Prometheus 
+capability of gathering matrices of cluster.
+grafana:
+Ui for metrices can be integrate with various data source(example: cloudwatch, prometheus)
+ but we are integrating it only with prometheus
+
+it can be quite challenging to set monitoring using prometheus and grafana there are many ways
+but we prefer helm for it.

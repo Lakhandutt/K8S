@@ -1,0 +1,41 @@
+#use stable charts for prometheus and grafana 
+ both supports large no of configuration which is very difficult to setup
+#so we use prometheus-operator which is combination of 
+   #prometheus
+   #Alertmanager
+   #grafana
+helm install --name monitoring --namespace monitoring stable/prometheus-operator
+kubectl get all -n monitoring
+
+#prometheus have Ui
+see service monitoring-prometheus-oper-prometheus type clusterip means it is only internally accessible
+switch this clusterip to loadbalancer 
+ kubectl edit -n monitoring service/monitoring-prometheus-oper-prometheus 
+ you can use another editor like nano inplace of vi
+ export EDITOR=nano
+ change clusterip to loadbalancer
+# if we edit the file wrong and exit it will again open the file with error message 
+in browser use prometheusloadbalancername.elb.amazonaws.com:9090/graph 
+ 
+now you can see that frontend of prometheus
+   node_load15 node metrix in every 15 min  on execute it will give metrix of all nodes in cluster 
+
+--------------------------------------------------------------------------
+working with grafana
+
+deactivate loadbalancer for prometheus and activate loadbalancer for 
+service/monitoring-grafana
+kubectl edit -n monitoring service/monitoring-prometheus-oper-prometheus
+# when we again edit it this will give us error nodeport may not used in type clusterip 
+#so we have to remove this key value pair after this we have to edit the grafana service 
+kubectl edit -n monitoring service/monitoring-grafana
+type: loadbalancer
+this will run grafana on loadbalancer url on port 80
+ we can get username and password from the github values in description 
+ username: admin 
+ password: prom-operator 
+Now grafana is working and having some dashboard already 
+example dashboard: 
+cluster health = kubernetes/compute resources/ cluster 
+nodes health = kubernetes/nodes 
+persistance volume= kubernetes/pvc

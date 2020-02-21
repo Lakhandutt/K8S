@@ -5,3 +5,8 @@ docker build -t lakhandutt/bb-exporter:v1 .
 #build-prometheus
 cd shellscriptfiles/prometheus
 docker build -t lakhandutt/prometheus:v1 .
+
+checking:
+up{}
+{instance="https://youtube.com",job="blackbox"}
+probe_duration_seconds{instance="https://youtube.com",job="blackbox"}

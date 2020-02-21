@@ -1,0 +1,49 @@
+kind: Service
+apiVersion: v1
+metadata:
+  # Unique key of the Service instance
+  name: prometheus-service
+spec:
+  ports:
+    # Accept traffic sent to port 80
+    - name: http
+      port: 9090 # accept traffic on port 80
+      targetPort: 9090   # and forward the traffic on port 80 of container (same as docker container run)
+      nodePort: 30080         
+  selector:
+    app: prometheus-app
+  type: NodePort 
+
+  #document seperator
+---
+kind: Service
+apiVersion: v1
+metadata:
+  # Unique key of the Service instance
+  name: grafana-service
+spec:
+  ports:
+    # Accept traffic sent to port 80
+    - name: http
+      port: 3000 # accept traffic on port 80
+      targetPort: 3000   # and forward the traffic on port 80 of container (same as docker container run)
+      nodePort: 30081         
+  selector:
+    app: grafana-app
+  type: NodePort 
+---
+kind: Service
+apiVersion: v1
+metadata:
+  # Unique key of the Service instance
+  name: blackbox-exporter-service
+spec:
+  ports:
+    # Accept traffic sent to port 80
+    - name: http
+      port: 9115 # accept traffic on port 80
+      targetPort: 9115   # and forward the traffic on port 80 of container (same as docker container run)
+      nodePort: 30082         
+  selector:
+    app: blackbox-exporter-app
+  type: NodePort 

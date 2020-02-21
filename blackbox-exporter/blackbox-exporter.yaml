@@ -1,0 +1,16 @@
+# camel case 
+apiVersion: v1
+# kind of object
+kind: Pod
+# use spaces not tabs
+metadata:
+  name: blackbox-exporter
+  #provide label on metadata block for service slectors
+  labels:
+    app: blackbox-exporter-app
+#specifications 
+spec:
+# list in yaml 
+  containers:
+  - name: blackbox-exporter-container
+    image: lakhandutt/bb-exporter:v1

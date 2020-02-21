@@ -1,0 +1,16 @@
+# camel case 
+apiVersion: v1
+# kind of object
+kind: Pod
+# use spaces not tabs
+metadata:
+  name: prometheus
+  #provide label on metadata block for service slectors
+  labels:
+    app: prometheus-app 
+#specifications 
+spec:
+# list in yaml 
+  containers:
+  - name: prometheus-container
+    image: lakhandutt/prometheus:v1

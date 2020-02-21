@@ -1,0 +1,19 @@
+scrape_configs:
+  - job_name: 'blackbox'
+    metrics_path: /probe
+    params:
+      module: [http_2xx]  # Look for a HTTP 200 response
+    static_configs:
+      - labels:
+          url_path: 'url_path'
+      - targets:
+        - http://google.com
+        - https://youtube.com
+    relabel_configs:
+      - source_labels: [__address__, url_path]  # <=== See here, I'm trying to append /url_path to probing target
+        separator: '/'
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: '192.168.99.100:30082' #blackbox-exporter url

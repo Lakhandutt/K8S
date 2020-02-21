@@ -1,0 +1,7 @@
+#build bb-exporter
+cd shellscriptfiles/bb-exporter/
+docker build -t lakhandutt/bb-exporter:v1 .
+
+#build-prometheus
+cd shellscriptfiles/prometheus
+docker build -t lakhandutt/prometheus:v1 .
